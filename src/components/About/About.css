@@ -1,0 +1,30 @@
+.about{
+    padding: 80px 216px 80px 104px;
+    display: flex;
+}
+
+.about__image{
+    margin-right: 56px;
+    width: 464px;
+    min-width: 464px;
+    height: 464px;
+    background-image: url('../../images/author.png');
+}
+
+.about__heading{
+    margin-top: 51px;
+    margin-bottom: 24px;
+    color: #1A1B22;
+    font-family: 'Roboto Slab', serif;
+    font-size: 40px;
+    font-weight: normal;
+    line-height: 1.15;
+}
+
+.about__paragraph{
+    color: #1A1B22;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 1.33;
+}

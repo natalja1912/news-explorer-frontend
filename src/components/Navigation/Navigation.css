@@ -1,0 +1,33 @@
+.nav{
+    margin-top: 19px;
+}
+
+.nav__link{
+    margin-left: 32px;
+    background-color: transparent;
+    text-decoration: none;
+    border: none;
+    color: #FFFFFF;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.33;
+    cursor: pointer;
+}
+
+.nav__link_type_auth{
+    display: inline-block;
+    margin-bottom: 13px;
+    text-align: center;
+    line-height: 48px;
+    width: 176px;
+    height: 48px;
+    border: 1px solid #FFFFFF;
+    border-radius: 100px;
+}
+
+.nav__link_type_active{
+    padding: 0;
+    padding-bottom: 25px;
+    border-bottom: 3px solid #FFFFFF;
+}
