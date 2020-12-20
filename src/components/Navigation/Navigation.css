@@ -7,12 +7,24 @@
     background-color: transparent;
     text-decoration: none;
     border: none;
-    color: #FFFFFF;
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 18px;
     line-height: 1.33;
     cursor: pointer;
+    transition: all 0.4s ease-in;
+}
+
+.nav__link_type_white{
+    color: #FFFFFF;
+}
+
+.nav__link_type_black{
+    color: #1A1B22;
+}
+
+.nav__link:hover{
+    opacity: 0.8;
 }
 
 .nav__link_type_auth{

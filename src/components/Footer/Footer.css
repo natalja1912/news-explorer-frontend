@@ -26,6 +26,11 @@
     font-size: 18px;
     line-height: 1.33;
     cursor: pointer;
+    transition: all 0.4s ease-in;
+}
+
+.footer__link:hover{
+    opacity: 0.8;
 }
 
 .footer__icons{
@@ -37,6 +42,11 @@
     display: inline-block;
     width: 20px;
     height: 20px;
+    transition: all 0.4s ease-in;
+}
+
+.footer__icon:hover{
+    opacity: 0.8;
 }
 
 .footer__icon:last-of-type{

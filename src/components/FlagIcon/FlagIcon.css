@@ -1,0 +1,24 @@
+.flag{
+    border: none;
+    background: #FFFFFF;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../images/icons/icon-flag.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    transition: all 0.4s ease-in;
+}
+
+.flag:hover{
+    background-image: url('../../images/icons/icon-flag-hover.svg');
+}
+
+.flag:active{
+    background-image: url('../../images/icons/icon-flag-active.svg');
+}
+

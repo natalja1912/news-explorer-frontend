@@ -1,13 +1,14 @@
 import React from 'react';
 import './Header.css';
+import { Link } from "react-router-dom";
 import Navigation from '../Navigation/Navigation';
 
-function Header() {
+function Header(props) {
     return (
         <header className="header">
             <div className="header__group">
-                <p className="header__logo">NewsExplorer</p>
-                <Navigation />
+                <Link to="/" className={`header__logo header__logo_type_${props.color}`}>NewsExplorer</Link>
+                <Navigation color={props.color} />
             </div>
         </header>
     );
