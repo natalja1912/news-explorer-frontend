@@ -5,13 +5,13 @@ import NewsCardList from '../NewsCardList/NewsCardList';
 import Header from '../Header/Header';
 import { cards } from '../../utils/constants';
 
-function Main() {
+function Main({loggedIn}) {
 
   return (
     <main>
       <Header color='white' />
       <SearchForm />
-      <NewsCardList cards={cards} />
+      <NewsCardList loggedIn={loggedIn} cards={cards} />
       <About />
     </main>
   );

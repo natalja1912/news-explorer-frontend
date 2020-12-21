@@ -11,10 +11,10 @@ function App() {
       <main className="content">
         <Switch>
           <Route path="/saved-news">
-            <SavedNews loggedIn="true" />
+            <SavedNews loggedIn={true} />
           </Route>
           <Route exact path="/">
-            <Main />
+            <Main loggedIn={false} />  
           </Route>
         </Switch>
         <Footer />
