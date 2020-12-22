@@ -15,11 +15,11 @@
     transition: all 0.4s ease-in;
 }
 
-.nav__link_type_white{
+.nav__link_color_white{
     color: #FFFFFF;
 }
 
-.nav__link_type_black{
+.nav__link_color_black{
     color: #1A1B22;
 }
 
@@ -42,4 +42,22 @@
     padding: 0;
     padding-bottom: 25px;
     border-bottom: 3px solid #FFFFFF;
+}
+
+.nav__link_type_auth.nav__link_color_black{
+    border: 1px solid #1A1B22;
+}
+
+.nav__link_type_active.nav__link_color_black{
+    border-bottom: 3px solid #1A1B22;
+}
+
+.nav__link_type_user::after{
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 2px;
+    width: 24px;
+    height: 24px;
+    background: url('../../images/icons/logout.svg');
 }

@@ -9,7 +9,7 @@ function Main({loggedIn}) {
 
   return (
     <main>
-      <Header color='white' />
+      <Header color='white' loggedIn={loggedIn} />
       <SearchForm />
       <NewsCardList loggedIn={loggedIn} cards={cards} />
       <About />
