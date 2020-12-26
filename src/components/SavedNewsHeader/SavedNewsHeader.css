@@ -1,6 +1,5 @@
 .savednews{
     padding-top: 120px;
-    margin: 0 104px;
 }
 
 .savednews__heading{
@@ -37,4 +36,24 @@
 
 .savednews__keywords-span{
     font-weight: 700;
+}
+
+@media screen and (max-width: 426px) {
+    .savednews{
+        padding-top: 64px;
+    }
+
+    .savednews__heading{
+        font-size: 12px;
+        margin-bottom: 16px;
+    }
+
+    .savednews__text{
+        font-size: 30px;
+        margin-bottom: 16px;
+    }
+
+    .savednews__keywords{
+        margin-bottom: 32px;
+    }
 }

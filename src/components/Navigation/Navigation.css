@@ -1,8 +1,12 @@
 .nav{
     margin-top: 19px;
+    display: flex;
 }
 
 .nav__link{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
     margin-left: 32px;
     background-color: transparent;
     text-decoration: none;
@@ -28,11 +32,15 @@
 }
 
 .nav__link_type_auth{
-    display: inline-block;
+    align-items: center;
+    box-sizing: border-box;
     margin-bottom: 13px;
+    padding: 0 17px;
     text-align: center;
-    line-height: 48px;
-    width: 176px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: auto;
     height: 48px;
     border: 1px solid #FFFFFF;
     border-radius: 100px;
@@ -40,8 +48,12 @@
 
 .nav__link_type_active{
     padding: 0;
-    padding-bottom: 25px;
+    padding-bottom: 20px;
     border-bottom: 3px solid #FFFFFF;
+}
+
+.nav__link_type_main{
+    padding-bottom: 20px;
 }
 
 .nav__link_type_auth.nav__link_color_black{
@@ -52,12 +64,46 @@
     border-bottom: 3px solid #1A1B22;
 }
 
+.nav__link_type_main.nav__link_color_black{
+    border-bottom: 3px solid #FFFFFF;
+}
+
 .nav__link_type_user::after{
     content: '';
     display: inline-block;
     vertical-align: middle;
-    margin-left: 2px;
+    margin-left: 6px;
     width: 24px;
     height: 24px;
     background: url('../../images/icons/logout.svg');
+}
+
+@media screen and (max-width: 768px) {
+    .nav{
+        margin-top: 14px;
+    }
+
+    .nav__link{
+        font-size: 16px;
+    }
+
+    .nav__link_type_main{
+        padding-bottom: 17px;
+    }
+
+    .nav__link_type_active{
+        padding-bottom: 17px;
+    }
+
+    .nav__link_type_auth{
+        height: 40px;
+        margin-bottom: 12px;
+        padding: 0 13px;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .nav{
+        display: none;
+    }
 }

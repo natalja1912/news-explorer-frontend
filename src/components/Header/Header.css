@@ -1,5 +1,4 @@
 .header{
-    padding: 0 104px;
     position: absolute;
     z-index: 2;
     box-sizing: border-box;
@@ -8,8 +7,10 @@
 }
 
 .header__group{
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .header__logo{
@@ -31,3 +32,41 @@
 .header__logo_type_black{
     color: #1A1B22;
 }
+
+.header__button{
+    display: none;
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s ease-in;
+}
+
+.header__button:hover{
+    opacity: 0.8;
+}
+
+.header__button_type_white{
+    background-image: url('../../images/icons/icon-menu-white.svg');
+}
+
+.header__button_type_black{
+    background-image: url('../../images/icons/icon-menu-black.svg');
+}
+
+@media screen and (max-width: 426px) {
+    .header{
+        padding: 16px 0;
+    }
+
+    .header__logo{
+        font-size: 16px;
+        line-height: 1;
+    }
+
+    .header__button{
+        display: block;
+    }
+}
+

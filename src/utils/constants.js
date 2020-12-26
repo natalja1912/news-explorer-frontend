@@ -60,6 +60,4 @@ export const savedCards = [{
 
 export const savedNewsNumber = 5;
 
-export const userName = 'Грета';
-
 export const keywordsList = ["Природа", "Тайга", "Парки", "Фотография"];

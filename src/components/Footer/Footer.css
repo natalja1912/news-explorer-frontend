@@ -1,5 +1,5 @@
 .footer{
-    padding: 32px 104px 26px 104px;
+    padding: 32px 0 26px 0;
     display: flex;
     justify-content: space-between;
 }
@@ -13,7 +13,7 @@
     line-height: 1.37;
 }
 
-.footer__links{
+.footer__links-group{
     display: flex;
 }
 
@@ -31,6 +31,10 @@
 
 .footer__link:hover{
     opacity: 0.8;
+}
+
+.footer__link:first-of-type{
+    margin-left: 0;
 }
 
 .footer__icons{
@@ -60,3 +64,37 @@
 .footer__icon_type_fb{
     background-image: url('../../images/fb.svg');
 }
+
+@media screen and (max-width: 1440px) {
+    .footer__link{
+        margin-left: 25px;
+    }
+    .footer__icons{
+        margin-left: 25px;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .footer{
+        padding: 20px 0;
+        flex-direction: column-reverse;
+    }
+
+    .footer__links-group{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .footer__links{
+        margin-bottom: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 72px;
+    }
+
+    .footer__link{
+        margin-left: 0;
+    }
+}
+
