@@ -33,7 +33,7 @@
     color: #1A1B22;
 }
 
-.header__button{
+.header__menu-button{
     display: none;
     width: 24px;
     height: 24px;
@@ -43,16 +43,22 @@
     transition: all 0.4s ease-in;
 }
 
-.header__button:hover{
+.header__menu-button:hover{
     opacity: 0.8;
 }
 
-.header__button_type_white{
+.header__menu-button_type_white{
     background-image: url('../../images/icons/icon-menu-white.svg');
 }
 
-.header__button_type_black{
+.header__menu-button_type_black{
     background-image: url('../../images/icons/icon-menu-black.svg');
+}
+
+.header__menu-button_active{
+    background-image: url('../../images/icons/close-button.svg');
+    background-size: contain;
+    background-position: center;
 }
 
 @media screen and (max-width: 426px) {
@@ -65,7 +71,7 @@
         line-height: 1;
     }
 
-    .header__button{
+    .header__menu-button{
         display: block;
     }
 }
