@@ -26,8 +26,12 @@ function Main({ loggedIn }) {
   }
 
   function handleMobile(value) {
-    console.log(value);
     setMobile(value);
+  }
+
+  function handleAuth(value) {
+    setLoginPopupOpen(value);
+    setMobile(!value);
   }
 
   return (
@@ -35,9 +39,9 @@ function Main({ loggedIn }) {
       <CurrentUserContext.Provider value={currentUser}>
         <LoginPopup isOpen={isLoginPopupOpen} onClose={() => setLoginPopupOpen(false)} redirectLoginPopup={(value) => setRegisterPopupOpen(value)} onUpdateUser={(value) => onUpdateUser(value)}></LoginPopup>
         <RegisterPopup isOpen={isRegisterPopupOpen} onClose={() => setRegisterPopupOpen(false)} redirectRegisterPopup={(value) => setLoginPopupOpen(value)} onUpdateUser={(value) => onUpdateUser(value)}></RegisterPopup>
-        {!isMobile && <Header color='white' loggedIn={loggedIn} handleAuth={value => setLoginPopupOpen(value)} handleMobile={value => handleMobile(value)} isMobile={isMobile} />}
+        {!isMobile && <Header color='white' hidden={isLoginPopupOpen || isRegisterPopupOpen} loggedIn={loggedIn} handleAuth={value => setLoginPopupOpen(value)} handleMobile={value => handleMobile(value)} isMobile={isMobile} />}
         {isMobile && <Popup isOpen={isMobile} onClose={() => setMobile(false)}>
-          <Header type='mobile' color='white' isMobile={isMobile} loggedIn={loggedIn} handleAuth={value => setLoginPopupOpen(value)} handleMobile={value => handleMobile(value)} />
+          <Header type='mobile' color='white' isMobile={isMobile} loggedIn={loggedIn} handleAuth={value => handleAuth(value)} handleMobile={value => handleMobile(value)} />
         </Popup>}
         <SearchForm />
         <NewsCardList loggedIn={loggedIn} cards={cards} />

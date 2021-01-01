@@ -131,15 +131,19 @@
     .card__heading{
         margin-bottom: 10px;
         font-size: 22px;
-        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow-y: hidden;
         text-overflow: ellipsis;
-        height: 74px;
     }
 
     .card__text{
-        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow-y: hidden;
         text-overflow: ellipsis;
-        height: 88px;
     }
 
     .card__keyword{

@@ -1,4 +1,4 @@
-.wrapper-margin{
+.wrapper{
     box-sizing: border-box;
     position: relative;
     padding: 0 104px;
@@ -8,13 +8,16 @@
 }
 
 @media screen and (max-width: 1439px) {
-    .wrapper-margin{
+    .wrapper{
         padding: 0 40px;
     }
 }
 
 @media screen and (max-width: 426px) {
-    .wrapper-margin{
+    .wrapper{
         padding: 0 16px;
+    }
+    .wrapper_no-padding{
+        padding: 0;
     }
 }
