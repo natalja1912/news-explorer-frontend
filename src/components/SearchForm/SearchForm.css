@@ -4,6 +4,7 @@
     padding-top: 160px;
     padding-bottom: 80px;
     background-image: url('../../images/search-news.png');
+    background-image: -webkit-image-set(url(../../images/search-news_1x.png) 1x, url(../../images/search-news_2x.png) 2x, url(../../images/search-news_3x.png) 3x);
     background-position: center;
 }
 
