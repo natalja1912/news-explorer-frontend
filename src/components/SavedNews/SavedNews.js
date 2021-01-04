@@ -16,7 +16,7 @@ function SavedNews({ loggedIn }) {
   }
 
   return (
-    <main className="savednews-content">
+    <section className="savednews-content">
       <CurrentUserContext.Provider value={currentUser}>
         {!isMobile && <Header color='black' loggedIn={loggedIn} handleMobile={value => handleMobile(value)} isMobile={isMobile} />}
         {isMobile && <Popup isOpen={isMobile} onClose={() => setMobile(false)}>
@@ -25,7 +25,7 @@ function SavedNews({ loggedIn }) {
         <SavedNewsHeader />
         <NewsCardList loggedIn={loggedIn} cards={savedCards} />
       </CurrentUserContext.Provider>
-    </main>
+    </section>
   );
 }
 

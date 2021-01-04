@@ -35,7 +35,7 @@ function Main({ loggedIn }) {
   }
 
   return (
-    <main className="main-page">
+    <section className="main-page">
       <CurrentUserContext.Provider value={currentUser}>
         <LoginPopup isOpen={isLoginPopupOpen} onClose={() => setLoginPopupOpen(false)} redirectLoginPopup={(value) => setRegisterPopupOpen(value)} onUpdateUser={(value) => onUpdateUser(value)}></LoginPopup>
         <RegisterPopup isOpen={isRegisterPopupOpen} onClose={() => setRegisterPopupOpen(false)} redirectRegisterPopup={(value) => setLoginPopupOpen(value)} onUpdateUser={(value) => onUpdateUser(value)}></RegisterPopup>
@@ -47,7 +47,7 @@ function Main({ loggedIn }) {
         <NewsCardList loggedIn={loggedIn} cards={cards} />
         <About />
       </CurrentUserContext.Provider>
-    </main>
+    </section>
   );
 }
 
