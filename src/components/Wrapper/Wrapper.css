@@ -1,0 +1,23 @@
+.wrapper{
+    box-sizing: border-box;
+    position: relative;
+    padding: 0 104px;
+    width: 100%;
+    max-width: 1440px;
+    margin: auto;
+}
+
+@media screen and (max-width: 1439px) {
+    .wrapper{
+        padding: 0 40px;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .wrapper{
+        padding: 0 16px;
+    }
+    .wrapper_no-padding{
+        padding: 0;
+    }
+}

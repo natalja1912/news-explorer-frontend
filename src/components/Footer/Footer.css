@@ -1,0 +1,100 @@
+.footer{
+    padding: 32px 0 26px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer__copyright{
+    margin: 0;
+    color: #B6BCBF;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 1.37;
+}
+
+.footer__links-group{
+    display: flex;
+}
+
+.footer__link{
+    margin-left: 45px;
+    color: #1A1B22;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 1.33;
+    cursor: pointer;
+    transition: all 0.4s ease-in;
+}
+
+.footer__link:hover{
+    opacity: 0.8;
+}
+
+.footer__link:first-of-type{
+    margin-left: 0;
+}
+
+.footer__icons{
+    margin-left: 45px;
+}
+
+.footer__icon{
+    margin-right: 28px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    transition: all 0.4s ease-in;
+}
+
+.footer__icon:hover{
+    opacity: 0.8;
+}
+
+.footer__icon:last-of-type{
+    margin-right: 0;
+}
+
+.footer__icon_type_github{
+    background-image: url('../../images/github.svg');
+}
+
+.footer__icon_type_fb{
+    background-image: url('../../images/fb.svg');
+}
+
+@media screen and (max-width: 1440px) {
+    .footer__link{
+        margin-left: 25px;
+    }
+    .footer__icons{
+        margin-left: 25px;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .footer{
+        padding: 20px 0;
+        flex-direction: column-reverse;
+    }
+
+    .footer__links-group{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .footer__links{
+        margin-bottom: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 72px;
+    }
+
+    .footer__link{
+        margin-left: 0;
+    }
+}
+

@@ -1,0 +1,84 @@
+@font-face {
+    font-family: "Inter";
+    src: url(./fonts/Inter-Regular.woff2);
+    font-weight: normal;
+  }
+
+  @font-face {
+    font-family: "Inter";
+    src: url(./fonts/Inter-Regular.woff);
+    font-weight: normal;
+  }
+
+  @font-face {
+    font-family: "Roboto Slab";
+    src: url(./fonts/RobotoSlab-Bold.woff);
+    font-weight: 700;
+  }
+
+  @font-face {
+    font-family: "Roboto Slab";
+    src: url(./fonts/RobotoSlab-Bold.woff2);
+    font-weight: 700;
+  }
+
+  @font-face {
+    font-family: "Roboto Slab";
+    src: url(./fonts/RobotoSlab-Regular.woff);
+    font-weight: normal;
+  }
+
+  @font-face {
+    font-family: "Roboto Slab";
+    src: url(./fonts/RobotoSlab-Regular.woff2);
+    font-weight: normal;
+  }
+
+
+  @font-face {
+    font-family: "Roboto";
+    src: url(./fonts/Roboto-Medium.woff);
+    font-weight: 500;
+  }
+
+  @font-face {
+    font-family: "Roboto";
+    src: url(./fonts/Roboto-Medium.woff2);
+    font-weight: 500;
+  }
+
+    @font-face {
+    font-family: "Roboto";
+    src: url(./fonts/Roboto-Black.woff);
+    font-weight: 900;
+  }
+
+  @font-face {
+    font-family: "Roboto";
+    src: url(./fonts/Roboto-Black.woff2);
+    font-weight: 900;
+  }
+
+  @font-face {
+    font-family: "Roboto";
+    src: url(./fonts/Roboto-Regular.woff);
+    font-weight: normal;
+  }
+
+  @font-face {
+    font-family: "Roboto";
+    src: url(./fonts/Roboto-Regular.woff2);
+    font-weight: normal;
+  }
+
+  @font-face {
+    font-family: "Source Sans Pro";
+    src: url(./fonts/SourceSansPro-Regular.woff);
+    font-weight: normal;
+  }
+
+  @font-face {
+    font-family: "Source Sans Pro";
+    src: url(./fonts/SourceSansPro-Regular.woff2);
+    font-weight: normal;
+  }
