@@ -67,7 +67,7 @@
     background-position: center;
 }
 
-@media screen and (max-width: 426px) {
+@media screen and (max-width: 600px) {
     .header{
         padding: 16px 0;
     }
