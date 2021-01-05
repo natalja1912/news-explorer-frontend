@@ -3,12 +3,13 @@ import SearchForm from '../SearchForm/SearchForm';
 import About from '../About/About';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import Header from '../Header/Header';
-import { cards } from '../../utils/constants';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './Main.css';
 import LoginPopup from '../LoginPopup/LoginPopup';
 import RegisterPopup from '../RegisterPopup/RegisterPopup';
 import Popup from '../Popup/Popup';
+import Preloader from '../Preloader/Preloader';
+import ErrorText from '../ErrorText/ErrorText';
 
 function Main({ loggedIn }) {
   let currentUser = { name: 'Грета' };
@@ -16,6 +17,9 @@ function Main({ loggedIn }) {
   const [isLoginPopupOpen, setLoginPopupOpen] = useState(false);
   const [isRegisterPopupOpen, setRegisterPopupOpen] = useState(false);
   const [isMobile, setMobile] = useState(false);
+  const [articles, setArticles] = useState([]);
+  const [keyWord, setKeyWord] = useState('');
+  const [isLoading, setLoading] = useState({ state: false, errorText: '' });
 
   function onUpdateUser(value) {
     const { email, name } = value;
@@ -34,6 +38,17 @@ function Main({ loggedIn }) {
     setMobile(!value);
   }
 
+  function getArticles(value) {
+    const cards = localStorage.getItem('articles');
+    const articles = JSON.parse(cards);
+    setArticles(articles);
+    setKeyWord(value);
+  }
+
+  function handleLoading(value) {
+    setLoading(value);
+  }
+
   return (
     <section className="main-page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -43,8 +58,10 @@ function Main({ loggedIn }) {
         {isMobile && <Popup isOpen={isMobile} onClose={() => setMobile(false)}>
           <Header type='mobile' color='white' isMobile={isMobile} loggedIn={loggedIn} handleAuth={value => handleAuth(value)} handleMobile={value => handleMobile(value)} />
         </Popup>}
-        <SearchForm />
-        <NewsCardList loggedIn={loggedIn} cards={cards} />
+        <SearchForm getArticles={(value) => getArticles(value)} setLoading={(value) => handleLoading(value)} />
+        {isLoading.state && <Preloader />}
+        {isLoading.errorText !== '' && <ErrorText text={isLoading.errorText} />}
+        {(keyWord !== '' && !isLoading.state) && <NewsCardList cards={articles} keyWord={keyWord} loggedIn={loggedIn} />}
         <About />
       </CurrentUserContext.Provider>
     </section>
