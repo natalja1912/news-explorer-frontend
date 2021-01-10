@@ -57,6 +57,10 @@
     padding-bottom: 20px;
 }
 
+.nav__link_type_saved{
+    padding-bottom: 23px;
+}
+
 .nav__link_type_auth.nav__link_color_black{
     border: 1px solid #1A1B22;
 }

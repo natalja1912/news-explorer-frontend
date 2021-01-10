@@ -7,7 +7,7 @@ import NewsCardList from '../NewsCardList/NewsCardList';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Popup from '../Popup/Popup';
 
-function SavedNews({ loggedIn}) {
+function SavedNews({ loggedIn, handleExit }) {
   const currentUser = { name: 'Грета' };
   const [isMobile, setMobile] = useState(false);
 
@@ -18,12 +18,12 @@ function SavedNews({ loggedIn}) {
   return (
     <section className="savednews-content">
       <CurrentUserContext.Provider value={currentUser}>
-        {!isMobile && <Header color='black' loggedIn={loggedIn} handleMobile={value => handleMobile(value)} isMobile={isMobile} />}
+        {!isMobile && <Header color='black' loggedIn={loggedIn} handleExit={() => handleExit()} handleMobile={value => handleMobile(value)} isMobile={isMobile} />}
         {isMobile && <Popup isOpen={isMobile} onClose={() => setMobile(false)}>
-          <Header type='mobile' color='white' isMobile={isMobile} loggedIn={loggedIn} handleMobile={value => handleMobile(value)} />
+          <Header type='mobile' color='white' handleExit={() => handleExit()} isMobile={isMobile} loggedIn={loggedIn} handleMobile={value => handleMobile(value)} />
         </Popup>}
         <SavedNewsHeader />
-       <NewsCardList loggedIn={loggedIn} cards={savedCards} />
+        <NewsCardList loggedIn={loggedIn} cards={savedCards} />
       </CurrentUserContext.Provider>
     </section>
   );
