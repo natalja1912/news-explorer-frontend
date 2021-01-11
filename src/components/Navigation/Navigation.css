@@ -6,7 +6,6 @@
 .nav__link{
     display: flex;
     white-space: nowrap;
-    text-overflow: ellipsis;
     align-items: flex-end;
     margin-left: 32px;
     background-color: transparent;

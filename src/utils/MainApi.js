@@ -6,6 +6,7 @@ export const authorize = (password, email) => {
         headers: {
             "Content-Type": "application/json"
         },
+        credentials: 'include',
         body: JSON.stringify({ "password": password, "email": email })
     })
         .then((response) => {
@@ -37,6 +38,7 @@ export const register = (password, email, name) => {
         headers: {
             'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify({ "password": password, "email": email, "name": name })
     })
         .then(response => {
@@ -55,8 +57,6 @@ export const register = (password, email, name) => {
             return response.json()
         })
         .then((data) => {
-            console.log(data);
-            localStorage.setItem('jwt', data.token);
             return data;
         })
 };
@@ -67,7 +67,6 @@ export const getContent = () => {
         credentials: 'include'
     })
         .then((response) => {
-            console.log(response);
             if (!response.ok) {
                 if (response.status === 401) {
                     return Promise.reject({
@@ -81,5 +80,23 @@ export const getContent = () => {
                 })
             }
             return response.json();
+        })
+}
+
+export const logout = () => {
+    return fetch(`${BASE_URL}/logout`, {
+        method: 'GET',
+        credentials: 'include'
+    })
+        .then((response) => {
+            if (!response.ok) {
+                return Promise.reject({
+                    status: response.status,
+                    message: response.statusText
+                })
+            }
+            return Promise.resolve({
+                message: "Пользователь разлогировался"
+            })
         })
 } 

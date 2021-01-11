@@ -5,6 +5,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import SavedNews from '../SavedNews/SavedNews';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import * as auth from '../../utils/MainApi';
 
 function App() {
@@ -14,19 +15,15 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      auth.getContent().then((res) => {
-        console.log(res);
+    auth.getContent()
+      .then((res) => {
         if (res) {
-          setLoggedIn({ loggedIn: true, userName: 'res.data.name' });
+          setLoggedIn({ loggedIn: true, userName: res.data.name });
         }
-        else localStorage.removeItem('jwt');
       })
-        .catch(() => {
-          console.log(`Пользователь не зарегистрирован в системе`);
-        })
-    }
+      .catch(() => {
+        console.log(`Пользователь не зарегистрирован в системе`);
+      })
   }, [])
 
   function handleRegister(user) {
@@ -50,8 +47,6 @@ function App() {
     auth.authorize(user.password, user.email)
       .then((data) => {
         if (data) {
-          localStorage.setItem('jwt', data.token);
-          console.log(data);
           setLoggedIn({ loggedIn: true, userName: user.name });
         }
         if (!data) {
@@ -67,21 +62,25 @@ function App() {
   }
 
   function handleExit() {
-    localStorage.removeItem('jwt');
-    setLoggedIn({ loggedIn: false, email: '' });
+    setLoggedIn({ loggedIn: false, userName: '' });
+    auth.logout()
+      .then(() => console.log("Пользователь разлогировался"))
+      .catch((err) => console.log(err));
     history.push('/');
   }
 
   return (
     <div className="page">
       <main className="content">
-        <Switch>
-          <ProtectedRoute path="/saved-news" handleExit={handleExit} loggedIn={loggedIn.loggedIn} component={SavedNews} user={loggedIn.email} />
-          <Route exact path="/">
-            <Main handleExit={handleExit} infoToolActive={infoToolActive} infoToolValues={infoToolValues} handleInfoToolValues={(data) => setInfoToolValues(data)} loggedIn={loggedIn.loggedIn} onLogin={(user) => handleLogin(user)} onRegister={(user) => handleRegister(user)} />
-          </Route>
-        </Switch>
-        <Footer />
+        <CurrentUserContext.Provider value={loggedIn.userName}>
+          <Switch>
+            <ProtectedRoute path="/saved-news" handleExit={handleExit} loggedIn={loggedIn.loggedIn} component={SavedNews} user={loggedIn.email} />
+            <Route exact path="/">
+              <Main handleExit={handleExit} infoToolActive={infoToolActive} infoToolValues={infoToolValues} handleInfoToolValues={(data) => setInfoToolValues(data)} loggedIn={loggedIn.loggedIn} onLogin={(user) => handleLogin(user)} onRegister={(user) => handleRegister(user)} />
+            </Route>
+          </Switch>
+          <Footer />
+        </CurrentUserContext.Provider>
       </main>
     </div>
   );
