@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link, useLocation } from "react-router-dom";
 import './Navigation.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function Navigation({ color, loggedIn, handleAuth, isMobile, handleExit }) {
+    console.log('ff');
     const location = useLocation();
     let currentUser = React.useContext(CurrentUserContext);
 

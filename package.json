@@ -18,7 +18,7 @@
   "scripts": {
     "predeploy": "npm run build",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && scp -r ./build/* natalja1912@178.154.229.170:/home/natalja1912/news-app/news-frontend",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

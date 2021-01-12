@@ -45,15 +45,8 @@ function App() {
 
   function handleLogin(user) {
     auth.authorize(user.password, user.email)
-      .then((data) => {
-        if (data) {
-          setLoggedIn({ loggedIn: true, userName: user.name });
-        }
-        if (!data) {
-          console.log('Произошла ошибка');
-          setInfoToolValues({ active: true, name: 'failure', text: 'Что-то пошло не так! Попробуйте ещё раз.' });
-        }
-        else return;
+      .then((user) => {
+        setLoggedIn({ loggedIn: true, userName: user.name });
       })
       .catch(err => {
         setInfoToolValues({ active: true, name: 'failure', text: 'Что-то пошло не так! Попробуйте ещё раз.' });
@@ -64,7 +57,7 @@ function App() {
   function handleExit() {
     setLoggedIn({ loggedIn: false, userName: '' });
     auth.logout()
-      .then(() => console.log("Пользователь разлогировался"))
+      .then(() => console.log("Пользователь разлогинился"))
       .catch((err) => console.log(err));
     history.push('/');
   }

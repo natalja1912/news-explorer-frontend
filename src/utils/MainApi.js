@@ -30,6 +30,9 @@ export const authorize = (password, email) => {
             }
             return response.json();
         })
+        .then((data) => {
+            return data.data;
+        });
 };
 
 export const register = (password, email, name) => {
