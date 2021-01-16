@@ -6,19 +6,23 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import SavedNews from '../SavedNews/SavedNews';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import * as auth from '../../utils/MainApi';
+import * as api from '../../utils/MainApi';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState({ loggedIn: false, userName: '' });
   const [infoToolValues, setInfoToolValues] = useState({ active: false, name: '', text: '' });
   const [infoToolActive, setInfoToolActive] = useState(false);
+  const [savedArticles, setSavedArticles] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
-    auth.getContent()
-      .then((res) => {
-        if (res) {
-          setLoggedIn({ loggedIn: true, userName: res.data.name });
+    Promise.all([api.getUserInfo(), api.getArticles()])
+      .then(([user, articles]) => {
+        if (user) {
+          setLoggedIn({ loggedIn: true, userName: user.data.name });
+        }
+        if (articles) {
+          setSavedArticles(articles.data);
         }
       })
       .catch(() => {
@@ -28,7 +32,7 @@ function App() {
 
   function handleRegister(user) {
     setInfoToolActive(true);
-    auth.register(user.password, user.email, user.name)
+    api.register(user.password, user.email, user.name)
       .then((data) => {
         if (data) {
           setInfoToolValues({ active: true, name: 'success', text: 'Пользователь успешно зарегистрирован!' });
@@ -44,7 +48,7 @@ function App() {
   }
 
   function handleLogin(user) {
-    auth.authorize(user.password, user.email)
+    api.authorize(user.password, user.email)
       .then((user) => {
         setLoggedIn({ loggedIn: true, userName: user.name });
       })
@@ -54,9 +58,19 @@ function App() {
       });
   }
 
+  function handleSaveArticle(item) {
+    api.createArticle(item)
+      .then(() => {
+        console.log("Статья сохранена");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   function handleExit() {
     setLoggedIn({ loggedIn: false, userName: '' });
-    auth.logout()
+    api.logout()
       .then(() => console.log("Пользователь разлогинился"))
       .catch((err) => console.log(err));
     history.push('/');
@@ -67,9 +81,9 @@ function App() {
       <main className="content">
         <CurrentUserContext.Provider value={loggedIn.userName}>
           <Switch>
-            <ProtectedRoute path="/saved-news" handleExit={handleExit} loggedIn={loggedIn.loggedIn} component={SavedNews} user={loggedIn.email} />
+            <ProtectedRoute path="/saved-news" handleExit={handleExit} loggedIn={loggedIn.loggedIn} component={SavedNews} user={loggedIn.email} savedArticles={savedArticles} />
             <Route exact path="/">
-              <Main handleExit={handleExit} infoToolActive={infoToolActive} infoToolValues={infoToolValues} handleInfoToolValues={(data) => setInfoToolValues(data)} loggedIn={loggedIn.loggedIn} onLogin={(user) => handleLogin(user)} onRegister={(user) => handleRegister(user)} />
+              <Main handleExit={handleExit} infoToolActive={infoToolActive} infoToolValues={infoToolValues} handleInfoToolValues={(data) => setInfoToolValues(data)} loggedIn={loggedIn.loggedIn} onLogin={(user) => handleLogin(user)} onRegister={(user) => handleRegister(user)} handleSaveArticle={(value) => handleSaveArticle(value)} />
             </Route>
           </Switch>
           <Footer />

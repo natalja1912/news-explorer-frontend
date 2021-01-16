@@ -4,7 +4,6 @@ import './Navigation.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function Navigation({ color, loggedIn, handleAuth, isMobile, handleExit }) {
-    console.log('ff');
     const location = useLocation();
     let currentUser = React.useContext(CurrentUserContext);
 

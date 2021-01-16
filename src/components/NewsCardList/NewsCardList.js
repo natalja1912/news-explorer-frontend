@@ -3,7 +3,7 @@ import './NewsCardList.css';
 import NewsCard from '../NewsCard/NewsCard';
 import Wrapper from '../Wrapper/Wrapper';
 
-function NewsCardList({ cards, keyWord, loggedIn }) {
+function NewsCardList({ cards, keyWord, loggedIn, handleSaveArticleButton }) {
     const [numberOfShownArticles, setNumberOfShownArticles] = useState(3);
     const [activeCards, setActiveCards] = useState(false);
     const [isMoreButtonActive, setMoreButtonActive] = useState(true);
@@ -31,6 +31,10 @@ function NewsCardList({ cards, keyWord, loggedIn }) {
         setNumberOfShownArticles(3);
     }, [keyWord])
 
+    function handleSaveArticle(value) {
+        handleSaveArticleButton(value);
+    }
+
     let shownCards = cards.slice(0, numberOfShownArticles);
 
     return (
@@ -40,7 +44,7 @@ function NewsCardList({ cards, keyWord, loggedIn }) {
                 <div className={`news__group ${activeCards && `news__group_active`}`}>
                     {!loggedIn && <h2 className="news__heading">Результаты поиска</h2>}
                     <div className="cards">
-                        {shownCards.map((item, index) => (<NewsCard key={index} card={{ 'keyword': keyWord, 'image': item.urlToImage, 'title': item.title, 'text': item.content, 'source': item.source.name, 'date': item.publishedAt }} loggedIn={loggedIn} />))}
+                        {shownCards.map((item, index) => (<NewsCard key={index} card={{ 'keyword': keyWord, 'image': item.image, 'link': item.link, 'title': item.title, 'text': item.text, 'source': item.source, 'date': item.date }} loggedIn={loggedIn} handleSaveArticleButton={(value) => handleSaveArticle(value)} />))}
                     </div>
                     {isMoreButtonActive && <button className="news__button" onClick={handleShowMoreButton}>Показать еще</button>}
                 </div>

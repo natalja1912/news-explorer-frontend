@@ -11,7 +11,7 @@ import Preloader from '../Preloader/Preloader';
 import ErrorText from '../ErrorText/ErrorText';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
-function Main({ loggedIn, onLogin, onRegister, loginState, infoToolActive, infoToolValues, handleInfoToolValues, handleExit }) {
+function Main({ loggedIn, onLogin, onRegister, loginState, infoToolActive, infoToolValues, handleInfoToolValues, handleExit, handleSaveArticle }) {
   const [isLoginPopupOpen, setLoginPopupOpen] = useState(loginState);
   const [isRegisterPopupOpen, setRegisterPopupOpen] = useState(false);
   const [isMobile, setMobile] = useState(false);
@@ -29,9 +29,12 @@ function Main({ loggedIn, onLogin, onRegister, loginState, infoToolActive, infoT
   }
 
   function getArticles(value) {
-    const cards = localStorage.getItem('articles');
+    let cards = localStorage.getItem('articles');
     const articles = JSON.parse(cards);
-    setArticles(articles);
+    const newArticles = articles.map(item => {
+      return { title: item.title, link: item.url, image: item.urlToImage, text: item.description, source: item.source.name, date: item.publishedAt }
+    });
+    setArticles(newArticles);
     setKeyWord(value);
   }
 
@@ -48,6 +51,10 @@ function Main({ loggedIn, onLogin, onRegister, loginState, infoToolActive, infoT
     setLoginPopupOpen(true);
   }
 
+  function handleSaveArticleButton(card) {
+    handleSaveArticle(card);
+  }
+
   return (
     <section className="main-page">
       {infoToolActive && <InfoTooltip name={infoToolValues.name} text={infoToolValues.text} isOpen={infoToolValues.active} handleRedirect={handleRedirect} onClose={infoToolClose} />}
@@ -60,7 +67,7 @@ function Main({ loggedIn, onLogin, onRegister, loginState, infoToolActive, infoT
       <SearchForm getArticles={(value) => getArticles(value)} setLoading={(value) => handleLoading(value)} />
       {isLoading.state && <Preloader />}
       {isLoading.errorText !== '' && <ErrorText text={isLoading.errorText} />}
-      {(keyWord !== '' && !isLoading.state) && <NewsCardList cards={articles} keyWord={keyWord} loggedIn={loggedIn} />}
+      {(keyWord !== '' && !isLoading.state) && <NewsCardList cards={articles} keyWord={keyWord} loggedIn={loggedIn} handleSaveArticleButton={(value) => handleSaveArticleButton(value)} />}
       <About />
     </section>
   );

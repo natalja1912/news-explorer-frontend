@@ -2,22 +2,22 @@ import React, { useState } from 'react';
 import './SearchForm.css';
 import newsApi from '../../utils/NewsApi';
 
-function SearchForm({getArticles, setLoading}) {
+function SearchForm({ getArticles, setLoading }) {
     const [inputValue, setInputValue] = useState('');
 
     function handleSearchButton(event) {
         event.preventDefault();
-        setLoading({ state: true, errorText: ''});
+        setLoading({ state: true, errorText: '' });
         newsApi.getCards(inputValue)
             .then((data) => {
                 const articles = JSON.stringify(data.articles);
                 localStorage.setItem('articles', articles);
                 getArticles(inputValue);
-                setLoading({ state: false, errorText: ''});
+                setLoading({ state: false, errorText: '' });
             })
             .catch((err) => {
                 console.log(err);
-                setLoading({ state: false, errorText: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'});
+                setLoading({ state: false, errorText: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз' });
             })
     }
 

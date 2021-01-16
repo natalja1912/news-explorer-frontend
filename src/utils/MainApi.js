@@ -1,11 +1,12 @@
 export const BASE_URL = 'https://api.news-reader.students.nomoredomains.rocks';
+export const headers = {
+    "Content-Type": "application/json"
+};
 
 export const authorize = (password, email) => {
     return fetch(`${BASE_URL}/signin`, {
         method: 'POST',
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: headers,
         credentials: 'include',
         body: JSON.stringify({ "password": password, "email": email })
     })
@@ -38,9 +39,7 @@ export const authorize = (password, email) => {
 export const register = (password, email, name) => {
     return fetch(`${BASE_URL}/signup`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: headers,
         credentials: 'include',
         body: JSON.stringify({ "password": password, "email": email, "name": name })
     })
@@ -64,7 +63,7 @@ export const register = (password, email, name) => {
         })
 };
 
-export const getContent = () => {
+export const getUserInfo = () => {
     return fetch(`${BASE_URL}/users/me`, {
         method: 'GET',
         credentials: 'include'
@@ -77,6 +76,41 @@ export const getContent = () => {
                         message: 'Токен не передан или передан не в том формате'
                     })
                 }
+                return Promise.reject({
+                    status: response.status,
+                    message: response.statusText
+                })
+            }
+            return response.json();
+        })
+}
+
+export const createArticle = (data) => {
+    return fetch(`${BASE_URL}/articles`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: headers,
+        body: JSON.stringify(data)
+    })
+        .then((response) => {
+            if (!response.ok) {
+                return Promise.reject({
+                    status: response.status,
+                    message: response.statusText
+                })
+            }
+            return response.json();
+        })
+}
+
+export const getArticles = () => {
+    return fetch(`${BASE_URL}/articles`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: headers,
+    })
+        .then((response) => {
+            if (!response.ok) {
                 return Promise.reject({
                     status: response.status,
                     message: response.statusText

@@ -7,10 +7,15 @@
     max-width: 400px;
 }
 
+.card__link{
+    text-decoration: none;
+    color: inherit;
+}
+
 .card__info{
     position: absolute;
     top: 24px;
-    left: 149px;
+    left: 144px;
     width: 182px;
     height: 40px;
     background: #FFFFFF;
@@ -56,6 +61,8 @@
     position: absolute;
     top: 24px;
     right: 24px;
+    border: none;
+    background-color: transparent;
 }
 
 .card__flag-icon:hover + .card__info{ opacity: 1; }
