@@ -32,7 +32,7 @@ function Main({ loggedIn, onLogin, onRegister, loginState, infoToolActive, infoT
     let cards = localStorage.getItem('articles');
     const articles = JSON.parse(cards);
     const newArticles = articles.map(item => {
-      return { title: item.title, link: item.url, image: item.urlToImage, text: item.description, source: item.source.name, date: item.publishedAt }
+      return { keyword: value, title: item.title, link: item.url, image: item.urlToImage, text: item.description, source: item.source.name, date: item.publishedAt }
     });
     setArticles(newArticles);
     setKeyWord(value);
@@ -66,8 +66,8 @@ function Main({ loggedIn, onLogin, onRegister, loginState, infoToolActive, infoT
       </Popup>}
       <SearchForm getArticles={(value) => getArticles(value)} setLoading={(value) => handleLoading(value)} />
       {isLoading.state && <Preloader />}
-      {isLoading.errorText !== '' && <ErrorText text={isLoading.errorText} />}
-      {(keyWord !== '' && !isLoading.state) && <NewsCardList cards={articles} keyWord={keyWord} loggedIn={loggedIn} handleSaveArticleButton={(value) => handleSaveArticleButton(value)} />}
+      {isLoading.errorText !== "" && <ErrorText text={isLoading.errorText} />}
+      {(keyWord !== '' && !isLoading.state && isLoading.errorText === "") && <NewsCardList cards={articles} keyWord={keyWord} loggedIn={loggedIn} handleSaveArticleButton={(value) => handleSaveArticleButton(value)} />}
       <About />
     </section>
   );

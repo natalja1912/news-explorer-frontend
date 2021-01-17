@@ -19,6 +19,18 @@
     transition: all 0.4s ease-in;
 }
 
+.nav__link-text{
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: none;
+    background-color: transparent;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.33;
+}
+
 .nav__link_color_white{
     color: #FFFFFF;
 }
@@ -72,25 +84,19 @@
     border-bottom: 3px solid #FFFFFF;
 }
 
-.nav__link_type_user_black::after{
-    content: '';
+.nav__link-icon{
     display: inline-block;
+    border: none;
+    background-color: transparent;
     box-sizing: border-box;
     vertical-align: middle;
-    margin-left: 6px;
     width: 24px;
     height: 24px;
     background: url('../../images/icons/logout.svg');
     background-repeat: no-repeat;
 }
 
-.nav__link_type_user_white::after{
-    content: '';
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 6px;
-    width: 24px;
-    height: 24px;
+.nav__link-icon_white{
     background: url('../../images/icons/logout-white.svg');
 }
 

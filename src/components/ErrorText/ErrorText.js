@@ -4,9 +4,11 @@ import './ErrorText.css';
 
 function ErrorText({ text }) {
     return (
-        <Wrapper>
-            <div className="error">{text}</div>
-        </Wrapper>
+        <div className="error">
+            <Wrapper>
+                <div >{text}</div>
+            </Wrapper>
+        </div>
     );
 }
 

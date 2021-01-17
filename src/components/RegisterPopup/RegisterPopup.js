@@ -6,7 +6,7 @@ import { validation } from '../../utils/validation';
 
 function RegisterPopup({ isOpen, onClose, onUpdateUser, redirectRegisterPopup }) {
     const [inputValues, setInputValues] = useState({ email: '', password: '', name: '' });
-    const [errorText, setErrorText] = useState({ email: 'Вы пропустили это поле', password: 'Вы пропустили это поле', name: 'Вы пропустили это поле' });
+    const [errorText, setErrorText] = useState({ email: '', password: '', name: '' });
 
     const [errors, setErrors] = useState({
         email: {
@@ -37,12 +37,13 @@ function RegisterPopup({ isOpen, onClose, onUpdateUser, redirectRegisterPopup })
 
         let emailText;
         let passwordText;
-        email === '' ? emailText = "Вы пропустили это поле" : emailText = "Неправильный формат email";
-        password === '' ? passwordText = "Вы пропустили это поле" : passwordText = "Пароль должен содержать не менее 8 символов";
+        email === '' ? emailText = "" : emailText = "Неправильный формат email";
+        password === '' ? passwordText = "" : passwordText = "Пароль должен содержать не менее 8 символов";
         setErrorText({
             ...errorText,
             'email': emailText,
             'password': passwordText,
+            'name': ''
         })
     }, [inputValues])
 
@@ -58,8 +59,25 @@ function RegisterPopup({ isOpen, onClose, onUpdateUser, redirectRegisterPopup })
 
     function handleSubmit(e) {
         e.preventDefault();
-        if (!inputValues.email || !inputValues.password || !inputValues.name) {
-            console.log("Заполните все поля формы");
+        if (!inputValues.email) {
+            setErrorText({
+                ...errorText,
+                'email': "Вы пропустили это поле"
+            })
+            return;
+        }
+        if (!inputValues.password) {
+            setErrorText({
+                ...errorText,
+                'password': "Вы пропустили это поле"
+            })
+            return;
+        }
+        if (!inputValues.name) {
+            setErrorText({
+                ...errorText,
+                'name': "Вы пропустили это поле"
+            })
             return;
         }
         onUpdateUser({ password: inputValues.password, email: inputValues.email, name: inputValues.name });
@@ -93,7 +111,7 @@ function RegisterPopup({ isOpen, onClose, onUpdateUser, redirectRegisterPopup })
                     {isPasswordErrorActive && <span className="popup__input-error">{errorText.password}</span>}
                 </label>
                 <label className="popup__input">Имя
-                    <input value={inputValues.name} placeholder='Введите своё имя' onChange={(e) => handleChange(e)} type="text" className="popup__text" name="name" minLength="2" maxLength="40" required />
+                    <input value={inputValues.name} placeholder='Введите своё имя' onChange={(e) => handleChange(e)} type="text" className="popup__text" name="name" minLength="2" maxLength="30" required />
                     {isNameErrorActive && <span className="popup__input-error">{errorText.name}</span>}
                 </label>
             </PopupWithForm>

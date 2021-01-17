@@ -6,7 +6,7 @@ import { validation } from '../../utils/validation';
 
 function LoginPopup({ isOpen, onClose, onUpdateUser, redirectLoginPopup }) {
     const [inputValues, setInputValues] = useState({ email: '', password: '' });
-    const [errorText, setErrorText] = useState({ email: 'Вы пропустили это поле.', password: 'Вы пропустили это поле.' });
+    const [errorText, setErrorText] = useState({ email: '', password: '' });
 
     const [errors, setErrors] = useState({
         email: {
@@ -32,8 +32,8 @@ function LoginPopup({ isOpen, onClose, onUpdateUser, redirectLoginPopup }) {
 
         let emailText;
         let passwordText;
-        email === '' ? emailText = "Вы пропустили это поле" : emailText = "Неправильный формат email";
-        password === '' ? passwordText = "Вы пропустили это поле" : passwordText = "Пароль должен содержать не менее 8 символов";
+        email === '' ? emailText = "" : emailText = "Неправильный формат email";
+        password === '' ? passwordText = "" : passwordText = "Пароль должен содержать не менее 8 символов";
         setErrorText({
             ...errorText,
             'email': emailText,
@@ -53,8 +53,18 @@ function LoginPopup({ isOpen, onClose, onUpdateUser, redirectLoginPopup }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        if (!inputValues.email || !inputValues.password) {
-            console.log("Заполните все поля формы");
+        if (!inputValues.email) {
+            setErrorText({
+                ...errorText,
+                'email': "Вы пропустили это поле"
+            })
+            return;
+        }
+        if (!inputValues.password) {
+            setErrorText({
+                ...errorText,
+                'password': "Вы пропустили это поле"
+            })
             return;
         }
         onUpdateUser({ password: inputValues.password, email: inputValues.email });

@@ -22,7 +22,7 @@ class NewsApi {
     }
 
     getCards(keyword) {
-        return fetch(`${this._url}/everything?q=${keyword}&pageSize=${this._pageSize}&to=${this._to}&from=${this._from}`, {
+        return fetch(`${this._url}/everything?q=${keyword}&pageSize=${this._pageSize}&to=${this._to}&from=${this._from}&apiKey=${apiKey}`, {
             headers: this._getHeaders()
         })
             .then(res => {
@@ -35,7 +35,7 @@ class NewsApi {
 }
 
 const newsApi = new NewsApi({
-    baseUrl: 'https://newsapi.org/v2',
+    baseUrl: 'https://nomoreparties.co/news/v2',
     pageSize: 100,
     to: new Date().toISOString().slice(0, 10),
     from: new Date((new Date()).valueOf() - (24* 60* 60 * 1000 * numberOfDaysForNewsApi)).toISOString().slice(0,10)

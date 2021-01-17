@@ -26,3 +26,14 @@
     font-size: 24px;
     line-height: 1.17;
 }
+
+.infotool__redirect-button{
+    border: none;
+    background-color: transparent;
+    text-align: start;
+    color: #2F71E5;
+    font-family: "Inter", Arial, sans-serif;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 1.33;
+}

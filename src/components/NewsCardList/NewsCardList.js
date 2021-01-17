@@ -3,26 +3,35 @@ import './NewsCardList.css';
 import NewsCard from '../NewsCard/NewsCard';
 import Wrapper from '../Wrapper/Wrapper';
 
-function NewsCardList({ cards, keyWord, loggedIn, handleSaveArticleButton }) {
+function NewsCardList({ cards, keyWord, loggedIn, handleSaveArticleButton, handleDeleteArticleButton }) {
     const [numberOfShownArticles, setNumberOfShownArticles] = useState(3);
-    const [activeCards, setActiveCards] = useState(false);
-    const [isMoreButtonActive, setMoreButtonActive] = useState(true);
+    const [activeCards, setActiveCards] = useState();
+    const [isMoreButtonActive, setMoreButtonActive] = useState();
 
     useEffect(() => {
         setActiveCards(prev => {
             if (cards.length === 0) {
-                return prev;
+                return false;
             }
-            return !prev;
+            return true;
+        })
+        setMoreButtonActive(prev => {
+            if (cards.length <= 3) {
+                return false;
+            }
+            if (cards.length === shownCards.length) {
+                return false;
+            }
+            return true;
         })
     }, [cards])
 
     function handleShowMoreButton() {
         setMoreButtonActive(prev => {
-            if (shownCards.length < cards.length - 3) {
-                return prev;
+            if ((shownCards.length < cards.length - 3) && cards.length > 3) {
+                return true;
             }
-            return !prev;
+            return false;
         })
         setNumberOfShownArticles(prev => prev + 3);
     }
@@ -35,16 +44,24 @@ function NewsCardList({ cards, keyWord, loggedIn, handleSaveArticleButton }) {
         handleSaveArticleButton(value);
     }
 
+    function handleDeleteArticle(value) {
+        handleDeleteArticleButton(value);
+    }
+
     let shownCards = cards.slice(0, numberOfShownArticles);
 
     return (
         <section className="news">
             <Wrapper className="wrapper-news">
-                <p className={`news__text ${!activeCards && `news__text_active`}`}>Ничего не найдено</p>
+                <div className={`news__text-group ${!activeCards && `news__text-group_active`}`}>
+                    <div className="news__not-found-icon"></div>
+                    <p className="news__bold-text">Ничего не найдено</p>
+                    <p className="news__text">К сожалению по вашему запросу ничего не найдено.</p>
+                </div>
                 <div className={`news__group ${activeCards && `news__group_active`}`}>
                     {!loggedIn && <h2 className="news__heading">Результаты поиска</h2>}
                     <div className="cards">
-                        {shownCards.map((item, index) => (<NewsCard key={index} card={{ 'keyword': keyWord, 'image': item.image, 'link': item.link, 'title': item.title, 'text': item.text, 'source': item.source, 'date': item.date }} loggedIn={loggedIn} handleSaveArticleButton={(value) => handleSaveArticle(value)} />))}
+                        {shownCards.map((item, index) => (<NewsCard key={index} card={{ 'keyword': item.keyword, '_id': item._id, 'image': item.image, 'link': item.link, 'title': item.title, 'text': item.text, 'source': item.source, 'date': item.date }} loggedIn={loggedIn} handleSaveArticleButton={(value) => handleSaveArticle(value)} handleDeleteArticleButton={(value) => handleDeleteArticle(value)} />))}
                     </div>
                     {isMoreButtonActive && <button className="news__button" onClick={handleShowMoreButton}>Показать еще</button>}
                 </div>

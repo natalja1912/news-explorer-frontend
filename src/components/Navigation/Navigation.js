@@ -15,7 +15,11 @@ function Navigation({ color, loggedIn, handleAuth, isMobile, handleExit }) {
         <nav className={`nav ${isMobile && `nav_mobile`}`}>
             <Link to="/" className={`nav__link nav__link_type_main nav__link_color_${color} ${location.pathname === '/' && `nav__link_type_active`}`}>Главная</Link>
             {loggedIn && <Link to="/saved-news" className={`nav__link nav__link_type_saved nav__link_color_${color} ${location.pathname === '/saved-news' && `nav__link_type_active`}`}>Сохранённые статьи</Link>}
-            {loggedIn ? <button className={`nav__link nav__link_color_${color} nav__link_type_auth nav__link_type_user_${color}`} onClick={handleExit}>{currentUser}</button>
+            {loggedIn ?
+                <div className={`nav__link nav__link_color_${color} nav__link_type_auth nav__link_type_user_${color}`}>
+                    <button className={`nav__link-text nav__link_color_${color}`}  onClick={handleExit}>{currentUser}</button>
+                    <button className={`nav__link-icon nav__link-icon_${color}`}></button>
+                </div>
                 : <button onClick={handleAuthButton} className={`nav__link nav__link_color_${color} nav__link_type_auth`}>Авторизоваться</button>}
         </nav>
     );

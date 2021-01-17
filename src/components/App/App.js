@@ -30,6 +30,20 @@ function App() {
       })
   }, [])
 
+  function errorPopup() {
+    setInfoToolValues({ active: true, name: 'failure', text: 'Что-то пошло не так! Попробуйте ещё раз.' });
+  }
+
+  function updateArticles() {
+    return api.getArticles()
+      .then((articles) => {
+        if (articles) {
+          setSavedArticles(articles.data);
+        }
+      })
+      .catch((err) => console.log(err))
+  }
+
   function handleRegister(user) {
     setInfoToolActive(true);
     api.register(user.password, user.email, user.name)
@@ -38,12 +52,12 @@ function App() {
           setInfoToolValues({ active: true, name: 'success', text: 'Пользователь успешно зарегистрирован!' });
         }
         else {
-          setInfoToolValues({ active: true, name: 'failure', text: 'Что-то пошло не так! Попробуйте ещё раз.' });
+          errorPopup();
         }
       })
       .catch(err => {
-        setInfoToolValues({ active: true, name: 'failure', text: 'Что-то пошло не так! Попробуйте ещё раз.' });
-        console.log(err)
+        errorPopup();
+        console.log(err);
       });
   }
 
@@ -52,8 +66,11 @@ function App() {
       .then((user) => {
         setLoggedIn({ loggedIn: true, userName: user.name });
       })
+      .then(() => {
+        updateArticles();
+      })
       .catch(err => {
-        setInfoToolValues({ active: true, name: 'failure', text: 'Что-то пошло не так! Попробуйте ещё раз.' });
+        errorPopup();
         console.log(err);
       });
   }
@@ -63,6 +80,26 @@ function App() {
       .then(() => {
         console.log("Статья сохранена");
       })
+      .then(() => {
+        updateArticles();
+      })
+      .catch(err => {
+        setInfoToolValues({ active: true, name: 'card-conflict', text: "Карточка уже была сохранена" });
+        console.log(err);
+      });
+  }
+
+  function handleDeleteArticle(item) {
+    const id = item._id;
+    api.deleteArticle(id)
+      .then(() => {
+        console.log("Статья удалена");
+      })
+      .then(() => {
+        setSavedArticles(prev => {
+          return prev.filter((item) => item._id !== id)
+        })
+      })
       .catch(err => {
         console.log(err);
       });
@@ -70,6 +107,7 @@ function App() {
 
   function handleExit() {
     setLoggedIn({ loggedIn: false, userName: '' });
+    localStorage.removeItem('articles');
     api.logout()
       .then(() => console.log("Пользователь разлогинился"))
       .catch((err) => console.log(err));
@@ -81,7 +119,7 @@ function App() {
       <main className="content">
         <CurrentUserContext.Provider value={loggedIn.userName}>
           <Switch>
-            <ProtectedRoute path="/saved-news" handleExit={handleExit} loggedIn={loggedIn.loggedIn} component={SavedNews} user={loggedIn.email} savedArticles={savedArticles} />
+            <ProtectedRoute path="/saved-news" handleExit={handleExit} loggedIn={loggedIn.loggedIn} component={SavedNews} user={loggedIn.email} savedArticles={savedArticles} handleDeleteArticle={(value) => handleDeleteArticle(value)} />
             <Route exact path="/">
               <Main handleExit={handleExit} infoToolActive={infoToolActive} infoToolValues={infoToolValues} handleInfoToolValues={(data) => setInfoToolValues(data)} loggedIn={loggedIn.loggedIn} onLogin={(user) => handleLogin(user)} onRegister={(user) => handleRegister(user)} handleSaveArticle={(value) => handleSaveArticle(value)} />
             </Route>

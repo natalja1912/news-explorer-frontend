@@ -4,7 +4,7 @@ import './NewsCard.css';
 import FlagIcon from '../icons/FlagIcon/FlagIcon';
 import TrashIcon from '../icons/TrashIcon/TrashIcon';
 
-function NewsCard({ card, loggedIn, handleSaveArticleButton }) {
+function NewsCard({ card, loggedIn, handleSaveArticleButton, handleDeleteArticleButton }) {
     const location = useLocation();
     const [flagButtonState, setFlagButtonState] = useState(false);
 
@@ -17,14 +17,14 @@ function NewsCard({ card, loggedIn, handleSaveArticleButton }) {
         day: 'numeric',
     });
 
-    function handleFlagButton() {
+    function handleIconButton() {
         setFlagButtonState(prev => {
             if (loggedIn) {
                 return !prev;
             }
             return prev;
         })
-        handleSaveArticleButton({ link: card.link, date: card.date, title: card.title, text: card.text, image: card.image, source: card.source, keyword: card.keyword });
+        savedNewsMode ? handleDeleteArticleButton(card) : handleSaveArticleButton({ link: card.link, date: card.date, title: card.title, text: card.text, image: card.image, source: card.source, keyword: card.keyword });
     }
 
     let savedNewsMode = loggedIn && (location.pathname === '/saved-news');
@@ -32,7 +32,7 @@ function NewsCard({ card, loggedIn, handleSaveArticleButton }) {
     return (
         <section className="card">
             {savedNewsMode && <div className="card__keyword">{card.keyword}</div>}
-            <button className="card__flag-icon" onClick={handleFlagButton}>{savedNewsMode ? <TrashIcon /> : <FlagIcon activeClassName={(flagButtonState && loggedIn) && `flag_active`} />}</button>
+            <button className="card__flag-icon" onClick={handleIconButton}>{savedNewsMode ? <TrashIcon /> : <FlagIcon activeClassName={(flagButtonState && loggedIn) && `flag_active`} />}</button>
             {(!loggedIn || flagButtonState) && <div className={`card__info ${loggedIn ? `card__info_logged` : `card__info_notlogged`}`}>
                 {cardInfoText}
             </div>}

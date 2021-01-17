@@ -1,13 +1,13 @@
-export function changeEnding(num) {
+export function changeNumberEnding(num) {
     const endNumber = num % 10;
-    if ((num === 1) || (endNumber === 1)) {
-        return 'го';
+    if (num === 1) {
+        return 'му другому';
     }
     if ((num > 1 && num < 5) || (endNumber > 1 && endNumber < 5)) {
-        return 'м';
+        return 'м другим';
     }
     if ((num > 6 && num < 9) || (endNumber > 6 && endNumber < 9)) {
-        return 'ми';
+        return 'ми другим';
     }
-    return 'ти';
+    return 'ти другим';
 }

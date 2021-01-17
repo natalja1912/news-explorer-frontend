@@ -1,5 +1,5 @@
-export const BASE_URL = 'https://api.news-reader.students.nomoredomains.rocks';
-export const headers = {
+const BASE_URL = 'https://api.news-reader.students.nomoredomains.rocks';
+const headers = {
     "Content-Type": "application/json"
 };
 
@@ -106,8 +106,23 @@ export const createArticle = (data) => {
 export const getArticles = () => {
     return fetch(`${BASE_URL}/articles`, {
         method: 'GET',
-        credentials: 'include',
-        headers: headers,
+        credentials: 'include'
+    })
+        .then((response) => {
+            if (!response.ok) {
+                return Promise.reject({
+                    status: response.status,
+                    message: response.statusText
+                })
+            }
+            return response.json();
+        })
+}
+
+export const deleteArticle = (id) => {
+    return fetch(`${BASE_URL}/articles/${id}`, {
+        method: 'DELETE',
+        credentials: 'include'
     })
         .then((response) => {
             if (!response.ok) {

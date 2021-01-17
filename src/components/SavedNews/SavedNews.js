@@ -5,11 +5,17 @@ import './SavedNews.css'
 import NewsCardList from '../NewsCardList/NewsCardList';
 import Popup from '../Popup/Popup';
 
-function SavedNews({ loggedIn, handleExit, savedArticles }) {
+function SavedNews({ loggedIn, handleExit, savedArticles, handleDeleteArticle }) {
+  let sortedCards = savedArticles.sort((a, b) => parseInt(a._id.slice(-2), 16) < parseInt(b._id.slice(-2), 16) ? 1 : -1);
+
   const [isMobile, setMobile] = useState(false);
 
   function handleMobile(value) {
     setMobile(value);
+  }
+
+  function handleDeleteArticleButton(card) {
+    handleDeleteArticle(card);
   }
 
   return (
@@ -18,8 +24,8 @@ function SavedNews({ loggedIn, handleExit, savedArticles }) {
       {isMobile && <Popup isOpen={isMobile} onClose={() => setMobile(false)}>
         <Header type='mobile' color='white' handleExit={() => handleExit()} isMobile={isMobile} loggedIn={loggedIn} handleMobile={value => handleMobile(value)} />
       </Popup>}
-      <SavedNewsHeader />
-      <NewsCardList loggedIn={loggedIn} cards={savedArticles} />
+      <SavedNewsHeader savedNews={savedArticles} />
+      <NewsCardList loggedIn={loggedIn} cards={sortedCards} handleDeleteArticleButton={(value) => handleDeleteArticleButton(value)} />
     </section>
   );
 }
