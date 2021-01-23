@@ -5,7 +5,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function Navigation({ color, loggedIn, handleAuth, isMobile, handleExit }) {
     const location = useLocation();
-    let currentUser = React.useContext(CurrentUserContext);
+    const currentUser = React.useContext(CurrentUserContext);
 
     function handleAuthButton() {
         handleAuth();

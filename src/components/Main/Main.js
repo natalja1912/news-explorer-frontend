@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from "react-router-dom";
 import SearchForm from '../SearchForm/SearchForm';
 import About from '../About/About';
 import NewsCardList from '../NewsCardList/NewsCardList';
@@ -18,6 +19,22 @@ function Main({ loggedIn, onLogin, onRegister, loginState, infoToolActive, infoT
   const [articles, setArticles] = useState([]);
   const [keyWord, setKeyWord] = useState('');
   const [isLoading, setLoading] = useState({ state: false, errorText: '' });
+  const location = useLocation();
+
+  useEffect(() => {
+    setRegisterPopupOpen(prev => {
+      if (location.state && location.state.from.pathname === "/saved-news") {
+        return true;
+      }
+      return false;
+    })
+  }, [])
+
+  useEffect(() => {
+    const cards = localStorage.getItem('cards');
+    const articles = JSON.parse(cards);
+    setArticles(articles);
+  }, [loggedIn])
 
   function handleMobile(value) {
     setMobile(value);
@@ -29,12 +46,13 @@ function Main({ loggedIn, onLogin, onRegister, loginState, infoToolActive, infoT
   }
 
   function getArticles(value) {
-    let cards = localStorage.getItem('articles');
+    const cards = localStorage.getItem('articles');
     const articles = JSON.parse(cards);
     const newArticles = articles.map(item => {
       return { keyword: value, title: item.title, link: item.url, image: item.urlToImage, text: item.description, source: item.source.name, date: item.publishedAt }
     });
     setArticles(newArticles);
+    localStorage.setItem('cards', JSON.stringify(newArticles));
     setKeyWord(value);
   }
 
@@ -52,7 +70,10 @@ function Main({ loggedIn, onLogin, onRegister, loginState, infoToolActive, infoT
   }
 
   function handleSaveArticleButton(card) {
-    handleSaveArticle(card);
+    if (loggedIn) {
+      handleSaveArticle(card);
+    }
+    else setRegisterPopupOpen(true);
   }
 
   return (
@@ -67,7 +88,7 @@ function Main({ loggedIn, onLogin, onRegister, loginState, infoToolActive, infoT
       <SearchForm getArticles={(value) => getArticles(value)} setLoading={(value) => handleLoading(value)} />
       {isLoading.state && <Preloader />}
       {isLoading.errorText !== "" && <ErrorText text={isLoading.errorText} />}
-      {(keyWord !== '' && !isLoading.state && isLoading.errorText === "") && <NewsCardList cards={articles} keyWord={keyWord} loggedIn={loggedIn} handleSaveArticleButton={(value) => handleSaveArticleButton(value)} />}
+      {(isLoading.errorText === "" && !isLoading.state && articles) && <NewsCardList cards={articles} keyWord={keyWord} loggedIn={loggedIn} handleSaveArticleButton={(value) => handleSaveArticleButton(value)} />}
       <About />
     </section>
   );

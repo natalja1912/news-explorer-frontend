@@ -59,6 +59,7 @@ function RegisterPopup({ isOpen, onClose, onUpdateUser, redirectRegisterPopup })
 
     function handleSubmit(e) {
         e.preventDefault();
+        isSubmitButtonActive = false;
         if (!inputValues.email) {
             setErrorText({
                 ...errorText,
@@ -97,7 +98,7 @@ function RegisterPopup({ isOpen, onClose, onUpdateUser, redirectRegisterPopup })
     const isEmailErrorActive = Object.values(errors.email).some((el) => el);
     const isPasswordErrorActive = Object.values(errors.password).some((el) => el);
     const isNameErrorActive = Object.values(errors.name).some((el) => el);
-    const isSubmitButtonActive = !isEmailErrorActive && !isPasswordErrorActive && !isNameErrorActive;
+    let isSubmitButtonActive = !isEmailErrorActive && !isPasswordErrorActive && !isNameErrorActive;
 
     return (
         <Popup isOpen={isOpen} onClose={handleClose}>

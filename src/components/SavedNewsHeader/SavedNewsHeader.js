@@ -6,16 +6,16 @@ import Wrapper from '../Wrapper/Wrapper';
 import { phraseEnding } from '../../utils/phrase-ending';
 
 function SavedNewsHeader({ savedNews }) {
-    let currentUser = React.useContext(CurrentUserContext);
+    const currentUser = React.useContext(CurrentUserContext);
 
     function onlyUnique(value, index, self) {
         return self.indexOf(value) === index;
     }
 
-    let keywordsList = savedNews.map(item => item.keyword);
-    let uniqueKeywords = keywordsList.filter(onlyUnique);
-    let ending = changeNumberEnding(uniqueKeywords.length - 2);
-    let articlesPhraseEnding = phraseEnding(savedNews.length);
+    const keywordsList = savedNews.map(item => item.keyword);
+    const uniqueKeywords = keywordsList.filter(onlyUnique);
+    const ending = changeNumberEnding(uniqueKeywords.length - 2);
+    const articlesPhraseEnding = phraseEnding(savedNews.length);
 
     return (
         <section className="savednews">

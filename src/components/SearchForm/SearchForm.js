@@ -35,7 +35,7 @@ function SearchForm({ getArticles, setLoading }) {
                 <h1 className="search__heading">Что творится в мире?</h1>
                 <p className="search__subheading">Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.</p>
                 <form className="search__form">
-                    <input value={inputValue} onChange={(e) => setInputValue(e.target.value.toString())} type="text" className="search__input" placeholder="Введите тему новости" />
+                    <input maxLength="30" value={inputValue} onChange={(e) => setInputValue(e.target.value.toString())} type="text" className="search__input" placeholder="Введите тему новости" />
                     <button className="search__button" onClick={(event) => handleSearchButton(event)}>Искать</button>
                 </form>
             </div>

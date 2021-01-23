@@ -6,7 +6,7 @@ import NewsCardList from '../NewsCardList/NewsCardList';
 import Popup from '../Popup/Popup';
 
 function SavedNews({ loggedIn, handleExit, savedArticles, handleDeleteArticle }) {
-  let sortedCards = savedArticles.sort((a, b) => parseInt(a._id.slice(-2), 16) < parseInt(b._id.slice(-2), 16) ? 1 : -1);
+  const sortedCards = savedArticles.sort((a, b) => parseInt(a._id.slice(-2), 16) < parseInt(b._id.slice(-2), 16) ? 1 : -1);
 
   const [isMobile, setMobile] = useState(false);
 

@@ -53,6 +53,7 @@ function LoginPopup({ isOpen, onClose, onUpdateUser, redirectLoginPopup }) {
 
     function handleSubmit(e) {
         e.preventDefault();
+        isSubmitButtonActive = false;
         if (!inputValues.email) {
             setErrorText({
                 ...errorText,
@@ -83,7 +84,7 @@ function LoginPopup({ isOpen, onClose, onUpdateUser, redirectLoginPopup }) {
 
     const isEmailErrorActive = Object.values(errors.email).some((el) => el);
     const isPasswordErrorActive = Object.values(errors.password).some((el) => el);
-    const isSubmitButtonActive = !isEmailErrorActive && !isPasswordErrorActive;
+    let isSubmitButtonActive = !isEmailErrorActive && !isPasswordErrorActive;
 
     return (
         <Popup isOpen={isOpen} onClose={handleClose}>

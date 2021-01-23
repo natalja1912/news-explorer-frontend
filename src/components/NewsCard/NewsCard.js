@@ -18,16 +18,16 @@ function NewsCard({ card, loggedIn, handleSaveArticleButton, handleDeleteArticle
     });
 
     function handleIconButton() {
+        savedNewsMode ? handleDeleteArticleButton(card) : handleSaveArticleButton({ link: card.link, date: card.date, title: card.title, text: card.text, image: card.image, source: card.source, keyword: card.keyword });
         setFlagButtonState(prev => {
             if (loggedIn) {
                 return !prev;
             }
             return prev;
         })
-        savedNewsMode ? handleDeleteArticleButton(card) : handleSaveArticleButton({ link: card.link, date: card.date, title: card.title, text: card.text, image: card.image, source: card.source, keyword: card.keyword });
     }
 
-    let savedNewsMode = loggedIn && (location.pathname === '/saved-news');
+    const savedNewsMode = loggedIn && (location.pathname === '/saved-news');
 
     return (
         <section className="card">

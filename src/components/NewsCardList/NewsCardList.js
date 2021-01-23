@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './NewsCardList.css';
 import NewsCard from '../NewsCard/NewsCard';
 import Wrapper from '../Wrapper/Wrapper';
+import {numberOfShownCards} from '../../utils/constants';
 
 function NewsCardList({ cards, keyWord, loggedIn, handleSaveArticleButton, handleDeleteArticleButton }) {
     const [numberOfShownArticles, setNumberOfShownArticles] = useState(3);
@@ -16,7 +17,7 @@ function NewsCardList({ cards, keyWord, loggedIn, handleSaveArticleButton, handl
             return true;
         })
         setMoreButtonActive(prev => {
-            if (cards.length <= 3) {
+            if (cards.length <= numberOfShownCards) {
                 return false;
             }
             if (cards.length === shownCards.length) {
@@ -28,16 +29,16 @@ function NewsCardList({ cards, keyWord, loggedIn, handleSaveArticleButton, handl
 
     function handleShowMoreButton() {
         setMoreButtonActive(prev => {
-            if ((shownCards.length < cards.length - 3) && cards.length > 3) {
+            if ((shownCards.length < cards.length - numberOfShownCards) && cards.length > numberOfShownCards) {
                 return true;
             }
             return false;
         })
-        setNumberOfShownArticles(prev => prev + 3);
+        setNumberOfShownArticles(prev => prev + numberOfShownCards);
     }
 
     useEffect(() => {
-        setNumberOfShownArticles(3);
+        setNumberOfShownArticles(numberOfShownCards);
     }, [keyWord])
 
     function handleSaveArticle(value) {

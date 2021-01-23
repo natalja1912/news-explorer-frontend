@@ -45,7 +45,6 @@ function App() {
   }
 
   function handleRegister(user) {
-    setInfoToolActive(true);
     api.register(user.password, user.email, user.name)
       .then((data) => {
         if (data) {
@@ -59,6 +58,7 @@ function App() {
         errorPopup();
         console.log(err);
       });
+    setInfoToolActive(true);
   }
 
   function handleLogin(user) {
@@ -73,6 +73,7 @@ function App() {
         errorPopup();
         console.log(err);
       });
+    setInfoToolActive(true);
   }
 
   function handleSaveArticle(item) {
@@ -106,11 +107,11 @@ function App() {
   }
 
   function handleExit() {
-    setLoggedIn({ loggedIn: false, userName: '' });
-    localStorage.removeItem('articles');
+    localStorage.clear();
     api.logout()
       .then(() => console.log("Пользователь разлогинился"))
       .catch((err) => console.log(err));
+    setLoggedIn({ loggedIn: false, userName: '' });
     history.push('/');
   }
 
