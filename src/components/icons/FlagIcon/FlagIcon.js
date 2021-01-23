@@ -1,10 +1,10 @@
 import React from 'react';
 import './FlagIcon.css';
 
-function FlagIcon() {
+function FlagIcon(props) {
     return (
-        <button className="flag">
-        </button>
+        <div className={`flag ${props.activeClassName}`}>
+        </div >
     );
 }
 

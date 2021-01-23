@@ -2,29 +2,30 @@ import React, { useState } from 'react';
 import Header from '../Header/Header';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import './SavedNews.css'
-import { savedCards } from '../../utils/constants';
 import NewsCardList from '../NewsCardList/NewsCardList';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Popup from '../Popup/Popup';
 
-function SavedNews({ loggedIn }) {
-  const currentUser = { name: 'Грета' };
+function SavedNews({ loggedIn, handleExit, savedArticles, handleDeleteArticle }) {
+  const sortedCards = savedArticles.sort((a, b) => parseInt(a._id.slice(-2), 16) < parseInt(b._id.slice(-2), 16) ? 1 : -1);
+
   const [isMobile, setMobile] = useState(false);
 
   function handleMobile(value) {
     setMobile(value);
   }
 
+  function handleDeleteArticleButton(card) {
+    handleDeleteArticle(card);
+  }
+
   return (
     <section className="savednews-content">
-      <CurrentUserContext.Provider value={currentUser}>
-        {!isMobile && <Header color='black' loggedIn={loggedIn} handleMobile={value => handleMobile(value)} isMobile={isMobile} />}
-        {isMobile && <Popup isOpen={isMobile} onClose={() => setMobile(false)}>
-          <Header type='mobile' color='white' isMobile={isMobile} loggedIn={loggedIn} handleMobile={value => handleMobile(value)} />
-        </Popup>}
-        <SavedNewsHeader />
-        <NewsCardList loggedIn={loggedIn} cards={savedCards} />
-      </CurrentUserContext.Provider>
+      {!isMobile && <Header color='black' loggedIn={loggedIn} handleExit={() => handleExit()} handleMobile={value => handleMobile(value)} isMobile={isMobile} />}
+      {isMobile && <Popup isOpen={isMobile} onClose={() => setMobile(false)}>
+        <Header type='mobile' color='white' handleExit={() => handleExit()} isMobile={isMobile} loggedIn={loggedIn} handleMobile={value => handleMobile(value)} />
+      </Popup>}
+      <SavedNewsHeader savedNews={savedArticles} />
+      <NewsCardList loggedIn={loggedIn} cards={sortedCards} handleDeleteArticleButton={(value) => handleDeleteArticleButton(value)} />
     </section>
   );
 }

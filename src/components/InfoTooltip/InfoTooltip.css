@@ -1,0 +1,39 @@
+.infotool__container{
+    box-sizing: border-box;
+    width: 430px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+    opacity: 1;
+    padding: 43px 36px 51px 36px;
+    z-index: 10;
+    
+}
+
+.infotool__text{
+    margin: 0;
+    margin-bottom: 14px;
+    color: #000000;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 1.17;
+}
+
+.infotool__redirect-button{
+    border: none;
+    background-color: transparent;
+    text-align: start;
+    color: #2F71E5;
+    font-family: "Inter", Arial, sans-serif;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 1.33;
+}

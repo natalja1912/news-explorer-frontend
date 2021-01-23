@@ -3,8 +3,8 @@ import './TrashIcon.css';
 
 function TrashIcon() {
     return (
-        <button className="trash">
-        </button>
+        <div className="trash">
+        </div>
     );
 }
 

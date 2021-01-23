@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 import Navigation from '../Navigation/Navigation';
 import Wrapper from '../Wrapper/Wrapper';
 
-function Header({ color, hidden, loggedIn, handleAuth, handleMobile, isMobile, setHeaderVisible }) {
+function Header({ color, hidden, loggedIn, handleAuth, handleMobile, isMobile, setHeaderVisible, handleExit }) {
 
     function handleMenuClick() {
         handleMobile(!isMobile);
     }
 
-    function handleAuthButton(){
+    function handleAuthButton() {
         handleAuth(true);
     }
 
@@ -22,7 +22,7 @@ function Header({ color, hidden, loggedIn, handleAuth, handleMobile, isMobile, s
                         <Link to="/" className={`header__logo header__logo_type_${color}`}>NewsExplorer</Link>
                         <button className={`header__menu-button header__menu-button_type_${color} ${isMobile && `header__menu-button_active`}`} onClick={handleMenuClick}></button>
                     </div>
-                    <Navigation isMobile={isMobile} loggedIn={loggedIn} color={color} handleAuth={handleAuthButton} setHeaderVisible={(value) => setHeaderVisible(value)} />
+                    <Navigation isMobile={isMobile} loggedIn={loggedIn} color={color} handleAuth={handleAuthButton} setHeaderVisible={(value) => setHeaderVisible(value)} handleExit={() => handleExit()} />
                 </div>
             </Wrapper>
         </header >

@@ -1,0 +1,13 @@
+.error{
+    margin: 0;
+    min-height: 282px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    background-color: #F5F6F7;
+	color: #B6BCBF;
+	font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+	font-size: 18px;
+	line-height: 1.33;
+}
