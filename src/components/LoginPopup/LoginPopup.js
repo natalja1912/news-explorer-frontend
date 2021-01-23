@@ -68,8 +68,8 @@ function LoginPopup({ isOpen, onClose, onUpdateUser, redirectLoginPopup }) {
             })
             return;
         }
-        onUpdateUser({ password: inputValues.password, email: inputValues.email });
         handleClose();
+        onUpdateUser({ password: inputValues.password, email: inputValues.email });
     }
 
     function handleClose() {

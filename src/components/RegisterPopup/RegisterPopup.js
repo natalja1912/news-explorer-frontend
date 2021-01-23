@@ -81,8 +81,8 @@ function RegisterPopup({ isOpen, onClose, onUpdateUser, redirectRegisterPopup })
             })
             return;
         }
-        onUpdateUser({ password: inputValues.password, email: inputValues.email, name: inputValues.name });
         handleClose();
+        onUpdateUser({ password: inputValues.password, email: inputValues.email, name: inputValues.name });
     }
 
     function handleClose() {
