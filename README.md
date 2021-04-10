@@ -10,10 +10,10 @@
  * CSS Flex Layout
  * Адаптивная верстка
 
-## Ссылка на сайт github pages 
-Фронтенд:
+## Ссылка на сайт github pages (Фронтенд)
 https://github.com/natalja1912/news-explorer-frontend
-Бэкенд:
+
+## Ссылка на сайт github pages (Бекенд)
 https://github.com/natalja1912/news-explorer-api
 
 ## Домен
